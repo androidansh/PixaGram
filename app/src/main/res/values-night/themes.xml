@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Insta_Clone_FIreBase" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+    <style name="Theme.Insta_Clone_FireBase" parent="Base.Theme.Insta_Clone_FIreBase" >
+        <item name="colorPrimary">@color/bgColor</item>
+        <item name="android:windowBackground">@color/bgColor</item>
+        <item name="colorAccent">@color/textColor</item>
+        <item name="colorPrimaryDark">@color/textColor</item>
+        <item name="android:statusBarColor">@color/bgColor</item>
+        <!-- Ensure that the system UI's theme is light -->
+
+    </style>
+
+    <style name="NavigationTab" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/textColor</item>
+        <item name="tabIndicatorColor">@color/textColor</item>
+        <item name="tabIndicatorHeight">@dimen/_1sdp</item>
+        <item name="tabSelectedTextAppearance">@style/NavigationTabTextAppeareance</item>
+    </style>
+
+
+    <style name="NavigationTabTextAppeareance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/_20sdp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

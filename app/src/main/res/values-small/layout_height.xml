@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <dimen name="profile_height" tools:ignore="MissingDefaultResource">@dimen/_250sdp</dimen>
+
+    <dimen name="personal_height" tools:ignore="MissingDefaultResource">@dimen/_275sdp</dimen>
+
+</resources>

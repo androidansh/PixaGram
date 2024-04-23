@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="textColor">#FFFFFFFF</color>
+    <color name="iconBg">#FFFFFFFF</color>
+    <color name="search_editText">#D6D6D6</color>
+    <color name="itemGray">#505050</color>
+    <color name="lightGray">#252525</color>
+    <color name="gray_transparent">#33FFFFFF</color>
+    <color name="dark_gray">#B3B6B6B6</color>
+    <color name="bgColor">#393939</color>
+    <color name="pink">#FF5C93</color>
+</resources>

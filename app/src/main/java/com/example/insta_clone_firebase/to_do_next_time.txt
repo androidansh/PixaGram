@@ -1,0 +1,8 @@
+1- user id search karte vaqt searched user ka data "actual_database_user_data" ka hai aur chahiye "create_user_model" class ka = done
+2- fix ui of the app and app name and logo
+
+3- fix like and mute option on tap and double tap.
+
+4- improve search user id frag ui
+
+5- put image msg where there is no reels or posts
