@@ -1,6 +1,7 @@
 package com.example.insta_clone_firebase.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -9,7 +10,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.insta_clone_firebase.Fragments.AboutUserFrag;
@@ -24,11 +28,16 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomeScreenActivity extends AppCompatActivity {
 
     public static create_user_model USER_DATA = new create_user_model();
     public static ArrayList<post_create> USER_POSTS = new ArrayList<>();
-    private ImageView showPost,searchUser, addPost, reel;
+    public static ImageView showPost,searchUser, addPost, reel;
+    public static LinearLayout navBarLayout;
+    public static CircleImageView activeAccount;
+    public static Window windowFrame;
     public static ImageView aboutUser;
 
     @Override
@@ -36,10 +45,17 @@ public class HomeScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_activity);
 
+        windowFrame = getWindow();
+//        windowFrame.addFlags(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        windowFrame.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        windowFrame.setStatusBarColor(ContextCompat.getColor(this, R.color.bgColor));
+
         showPost = findViewById(R.id.showAllPost);
+        navBarLayout = findViewById(R.id.navBarLayout);
         searchUser = findViewById(R.id.searchUser);
         addPost = findViewById(R.id.AddPost);
         reel = findViewById(R.id.reels);
+        activeAccount = findViewById(R.id.activeAccount);
         aboutUser = findViewById(R.id.aboutUser);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -49,6 +65,11 @@ public class HomeScreenActivity extends AppCompatActivity {
         addPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showPost.setBackgroundResource(R.drawable.home);
+                searchUser.setBackgroundResource(R.drawable.find);
+                activeAccount.setVisibility(View.INVISIBLE);
+                addPost.setBackgroundResource(R.drawable.active_add);
+                reel.setBackgroundResource(R.drawable.reels);
                 startActivity(new Intent(HomeScreenActivity.this, AddPostReelActivity.class));
             }
         });
@@ -74,6 +95,9 @@ public class HomeScreenActivity extends AppCompatActivity {
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showPost.setBackgroundResource(R.drawable.home);
+                searchUser.setBackgroundResource(R.drawable.active_find);
+                activeAccount.setVisibility(View.INVISIBLE);
                 FragmentManager fm  = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.addToBackStack("");

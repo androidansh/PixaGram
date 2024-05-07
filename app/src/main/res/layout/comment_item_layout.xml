@@ -11,7 +11,7 @@
         android:id="@+id/specificCommentOwnerPic"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
-        android:src="@drawable/bg1"
+        android:src="@drawable/user_no_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

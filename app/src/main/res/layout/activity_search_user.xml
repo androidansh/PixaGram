@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_8sdp"
-        android:background="@color/bgColor"
+        android:background="@drawable/setting_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_2sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,9 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:text="userID"
-            android:textColor="@color/textColor"
+            android:textColor="@color/bgColor"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintStart_toEndOf="@+id/searchBack"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +69,7 @@
             android:layout_width="@dimen/_96sdp"
             android:layout_height="@dimen/_96sdp"
             android:layout_marginTop="@dimen/_25sdp"
-            android:src="@color/bgColor"
+            android:src="#B576EC"
             app:layout_constraintBottom_toBottomOf="@+id/profileBorder"
             app:layout_constraintEnd_toEndOf="@+id/profileBorder"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,33 +80,33 @@
             android:layout_width="@dimen/_92sdp"
             android:layout_height="@dimen/_92sdp"
             android:layout_marginTop="@dimen/_25sdp"
-            android:src="@drawable/bg1"
+            android:src="@drawable/user_no_img"
             app:layout_constraintBottom_toBottomOf="@+id/profileBorder"
             app:layout_constraintEnd_toEndOf="@+id/profileBorder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_UserID" />
 
-        <TextView
-            android:id="@+id/search_userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="user name"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/_13sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_userProfile" />
+<!--        <TextView-->
+<!--            android:id="@+id/search_userName"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_8sdp"-->
+<!--            android:text="user name"-->
+<!--            android:textColor="@color/textColor"-->
+<!--            android:textSize="@dimen/_13sdp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/search_userProfile" />-->
 
         <TextView
             android:id="@+id/search_userBio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
             android:text="bio details"
-            android:textColor="@color/textColor"
+            android:layout_margin="@dimen/_15sdp"
+            android:textColor="@color/bgColor"
             android:textSize="@dimen/_11sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_userName" />
+            app:layout_constraintTop_toBottomOf="@+id/profileBorder" />
 
         <LinearLayout
             android:id="@+id/searchUserPost"
@@ -124,14 +124,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/textColor"
+                android:textColor="@color/bgColor"
                 android:textSize="@dimen/_18sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Posts"
-                android:textColor="@color/textColor"
+                android:textColor="@color/bgColor"
                 android:textSize="@dimen/_14sdp" />
 
         </LinearLayout>
@@ -152,14 +152,14 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="@color/textColor"
+                android:textColor="@color/bgColor"
                 android:textSize="@dimen/_18sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Followers"
-                android:textColor="@color/textColor"
+                android:textColor="@color/bgColor"
                 android:textSize="@dimen/_14sdp" />
 
         </LinearLayout>
@@ -179,14 +179,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/textColor"
+                android:textColor="@color/bgColor"
                 android:textSize="@dimen/_18sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Following"
-                android:textColor="@color/textColor"
+                android:textColor="@color/bgColor"
                 android:textSize="@dimen/_14sdp" />
 
         </LinearLayout>
@@ -223,5 +223,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_post_found_msg1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchPostRecycler">
+
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/no_user_post"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No posts yet"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

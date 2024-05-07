@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.insta_clone_firebase.activities.HomeScreenActivity;
 import com.example.insta_clone_firebase.R;
 import com.example.insta_clone_firebase.activities.SignUpActivity;
+import com.example.insta_clone_firebase.thread_package.get_all_reels;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
@@ -40,11 +41,10 @@ import kotlin.Unit;
 
 public class AddDataFrag extends Fragment {
 
-    private EditText createBio,createPhone;
+    private EditText createBio;
     private ImageView profile;
     private Button createAccount;
     private Uri profileUri;
-    private TextView whiteScr;
     private ProgressBar progress;
 
     @Override
@@ -53,9 +53,7 @@ public class AddDataFrag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_data, container, false);
         profile = view.findViewById(R.id.profile);
         createBio = view.findViewById(R.id.createBio);
-        createPhone = view.findViewById(R.id.createNum);
         createAccount = view.findViewById(R.id.createAccount);
-        whiteScr = view.findViewById(R.id.whiteScr);
         progress = view.findViewById(R.id.progress);
 
         createAccount.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +64,6 @@ public class AddDataFrag extends Fragment {
                 }
                 else
                 {
-                    whiteScr.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.VISIBLE);
                     new Thread(new StoreRun()).start();
                 }
@@ -83,6 +80,7 @@ public class AddDataFrag extends Fragment {
         });
         return view;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -136,12 +134,7 @@ public class AddDataFrag extends Fragment {
                         }else{
                             SignUpActivity.createUserModel.setUser_bio(createBio.getText().toString());
                         }
-                        if(createPhone.getText().toString().isEmpty()){
-                            SignUpActivity.createUserModel.setUser_phone("");
-                        }
-                        else{
-                            SignUpActivity.createUserModel.setUser_phone(createPhone.getText().toString());
-                        }
+                        SignUpActivity.createUserModel.setUser_phone("");
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         DocumentReference ref = db.collection("Instagram User Private Data").document(SignUpActivity.createUserModel.getUser_id());
                         ref.set(SignUpActivity.createUserModel).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -153,8 +146,10 @@ public class AddDataFrag extends Fragment {
                                 edit.putString("database_id",SignUpActivity.createUserModel.getUser_id());
                                 edit.putBoolean("isLogged",true);
                                 edit.apply();
+                                get_all_reels.getReels(getContext());
                                 getContext().startActivity(new Intent(getContext(), HomeScreenActivity.class));
                                 getActivity().finish();
+
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {

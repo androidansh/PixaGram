@@ -5,43 +5,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_10sdp"
     android:background="@color/bgColor"
     tools:context=".Fragments.SearchUserFrag">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/l3"
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/l3"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_40sdp"-->
+<!--        android:background="@drawable/search_edit_text_bg"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:paddingStart="@dimen/_5sdp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/searchEditText"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTintMode="@null"-->
+<!--            android:hint="find user id"-->
+<!--            android:padding="@dimen/_5sdp"-->
+<!--            android:singleLine="true"-->
+<!--            android:textColor="@color/textColor"-->
+<!--            android:textSize="@dimen/_15sdp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/search"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/search"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/find"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/search_edit_text_bg"
-        android:padding="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/searchEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="find user id"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:background="@color/bgColor"
+            android:layout_height="@dimen/_40sdp"
+            android:padding="@dimen/_5sdp">
 
-            android:padding="@dimen/_5sdp"
-            android:textColor="@color/textColor"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/search"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@drawable/find"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/find"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/bgColor"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:backgroundTintMode="@null"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="find user id"
+                android:singleLine="true"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A6A6A6"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/search"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 
@@ -53,19 +106,23 @@
         android:text="No Match Found"
         android:textColor="@color/textColor"
         android:textSize="@dimen/_35sdp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/l3" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView8" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResult"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/_10sdp"
         android:background="@color/bgColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/l3" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView8" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +55,7 @@ public class found_user_adapter extends RecyclerView.Adapter<found_user_adapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView foundId;
-        private ConstraintLayout layout;
+        private CardView layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

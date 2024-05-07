@@ -1,5 +1,6 @@
 package com.example.insta_clone_firebase.Fragments;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
@@ -11,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.insta_clone_firebase.R;
+import com.example.insta_clone_firebase.activities.HomeScreenActivity;
 import com.example.insta_clone_firebase.adapter.found_user_adapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +43,15 @@ public class SearchUserFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_user, container, false);
+
+        HomeScreenActivity.windowFrame.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        HomeScreenActivity.windowFrame.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.bgColor));
+
+        HomeScreenActivity.showPost.setBackgroundResource(R.drawable.home);
+        HomeScreenActivity.searchUser.setBackgroundResource(R.drawable.active_find);
+        HomeScreenActivity.activeAccount.setVisibility(View.INVISIBLE);
+        HomeScreenActivity.addPost.setBackgroundResource(R.drawable.add);
+        HomeScreenActivity.reel.setBackgroundResource(R.drawable.reels);
 
         searchET = view.findViewById(R.id.searchEditText);
         search = view.findViewById(R.id.search);
@@ -84,6 +96,16 @@ public class SearchUserFrag extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        HomeScreenActivity.showPost.setBackgroundResource(R.drawable.home);
+        HomeScreenActivity.searchUser.setBackgroundResource(R.drawable.active_find);
+        HomeScreenActivity.activeAccount.setVisibility(View.INVISIBLE);
+        HomeScreenActivity.addPost.setBackgroundResource(R.drawable.add);
+        HomeScreenActivity.reel.setBackgroundResource(R.drawable.reels);
     }
 
     private void getAllIds() {

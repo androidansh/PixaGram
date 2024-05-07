@@ -72,7 +72,6 @@ dependencies {
     // lottie animation
     implementation("com.airbnb.android:lottie:6.3.0")
 
-
     // custom spin progress bar
     implementation("com.github.ybq:Android-SpinKit:1.4.0")
 

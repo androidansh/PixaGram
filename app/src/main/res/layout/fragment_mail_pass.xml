@@ -5,161 +5,166 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_ig"
+    android:background="@drawable/sign_up_bg"
     tools:context=".SignUpFrags.MailPassFrag">
 
-    <TextView
-        android:id="@+id/whiteScr"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        android:background="#4DFFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:visibility="invisible"
-        android:outlineAmbientShadowColor="#2196F3"
-        android:outlineSpotShadowColor="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/whiteScr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/whiteScr"
-        app:layout_constraintVertical_bias="0.531" />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress"-->
+<!--        android:layout_width="@dimen/_50sdp"-->
+<!--        android:layout_height="@dimen/_50sdp"-->
+<!--        android:outlineAmbientShadowColor="#2196F3"-->
+<!--        android:outlineSpotShadowColor="#2196F3"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/whiteScr"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.604"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/whiteScr"-->
+<!--        app:layout_constraintVertical_bias="0.848" />-->
 
     <TextView
         android:id="@+id/msg1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_80sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:text="Enter email to verify."
-        android:textColor="@color/white"
-        android:textSize="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Enter email to verify"
+        android:textColor="@color/primaryColor"
+        android:textSize="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.247"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/msg3"
         android:layout_width="0dp"
+        android:layout_margin="@dimen/_5sdp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:text="** an otp will send to your email. Please enter otp the correct to verify."
-        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_medium_italic"
+        android:text="** an otp will send to your email(This might take a while for sending email.).When received enter otp the correctly to verify."
+        android:textColor="@color/dark_gray"
         android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/msg1" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/msg2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="76dp"
-        android:enabled="false"
-        android:text="Enter email and password to create account"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_15sdp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/createEmail"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/signup_edit_text_bg"
-        android:hint="Enter Email"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="Enter Email"
         android:padding="@dimen/_8sdp"
-        android:textColor="@color/white"
-        android:textColorHint="#E4E4E4"
-        android:textSize="@dimen/_15sdp"
+        app:flow_wrapMode="none"
+        android:singleLine="true"
+        android:textColor="@color/dark_gray"
+        android:textColorHint="@color/lightGray"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/msg1" />
-
 
     <EditText
         android:id="@+id/createPassword"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/signup_edit_text_bg"
+        android:fontFamily="@font/roboto_medium"
+        android:enabled="false"
         android:hint="Enter password"
+        android:singleLine="true"
         android:padding="@dimen/_8sdp"
-        android:textColor="@color/white"
-        android:textColorHint="#E4E4E4"
-        android:textSize="@dimen/_15sdp"
-        android:visibility="invisible"
+        android:textColor="@color/dark_gray"
+        android:textColorHint="@color/lightGray"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/otp" />
 
     <EditText
         android:id="@+id/otp"
-        android:layout_width="@dimen/_150sdp"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/signup_edit_text_bg"
-        android:hint="Enter otp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:enabled="false"
+        android:singleLine="true"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="Enter otp"
         android:padding="@dimen/_8sdp"
-        android:textColor="@color/white"
-        android:textColorHint="#E4E4E4"
-        android:textSize="@dimen/_15sdp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/dark_gray"
+        android:textColorHint="@color/lightGray"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createEmail" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/verifyOTP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_blue_bg"
-        android:padding="@dimen/_10sdp"
-        android:text="Send OTP"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_13sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/otp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.836"
-        app:layout_constraintStart_toEndOf="@+id/otp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/next2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_25sdp"
-        android:background="@drawable/btn_blue_bg"
-        android:text="Next"
-        android:visibility="invisible"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_15sdp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_marginBottom="@dimen/_170sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <ImageView
+            android:id="@+id/proceedMail"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:background="@drawable/sign_up_button_bg"
+            android:rotation="45"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/proceedMailBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:fontFamily="@font/roboto_medium"
+            android:tag="notOk"
+            android:text="Send Otp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:indeterminateTint="@color/bgColor"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/next2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/_10sdp"-->
+<!--        android:layout_marginEnd="@dimen/_10sdp"-->
+<!--        android:background="@drawable/btn_blue_bg"-->
+<!--        android:text="Next"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="@dimen/_15sdp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:layout_editor_absoluteY="784dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

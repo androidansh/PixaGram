@@ -2,6 +2,8 @@ package com.example.insta_clone_firebase.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,9 +42,11 @@ public class Search_User_Activity extends AppCompatActivity
     private TextView searchUserId,searchUserName,searchUserBio,searchNumPost,searchNumFollower,searchNumFollowing;
     private Button actionBtn;
     String searchID;
+    public Window windowFrame;
     public static create_user_model foundUserObj;
     private small_post_adapter adapter;
     private RecyclerView recyclerView;
+    private ConstraintLayout noPostMsg;
     private LinearLayout searchPost,searchFollower,searchFollowing;
     private Boolean isFollowing = false;
     private Boolean isFollower = false;
@@ -50,18 +56,19 @@ public class Search_User_Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
-
+        windowFrame = getWindow();
+        windowFrame.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        windowFrame.setStatusBarColor(ContextCompat.getColor(this, R.color.transparent));
 
         back = findViewById(R.id.searchBack);
         searchProfile = findViewById(R.id.search_userProfile);
         searchUserId = findViewById(R.id.search_UserID);
-        searchUserName = findViewById(R.id.search_userName);
         searchUserBio = findViewById(R.id.search_userBio);
         searchNumPost = findViewById(R.id.numPost);
         searchNumFollower = findViewById(R.id.numFollower);
         searchNumFollowing = findViewById(R.id.numFollowing);
         actionBtn = findViewById(R.id.actionBTN);
-
+        noPostMsg = findViewById(R.id.no_post_found_msg1);
         recyclerView = findViewById(R.id.searchPostRecycler);
 
         searchPost = findViewById(R.id.searchUserPost);
@@ -338,14 +345,25 @@ public class Search_User_Activity extends AppCompatActivity
         actionBtn.setBackgroundResource(R.drawable.btn_blue_bg);
 
         searchUserId.setText(foundUserObj.getUser_id());
-        searchUserName.setText(foundUserObj.getUser_name());
+//        searchUserName.setText(foundUserObj.getUser_name());
         searchUserBio.setText(foundUserObj.getUser_bio());
         Glide.with(this).load( foundUserObj.getUser_profile()).into(searchProfile);
         if( foundUserObj.getPosts() == null){
             searchNumPost.setText("0");
+            noPostMsg.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
         }
         else{
-            searchNumPost.setText( foundUserObj.getPosts().size() + "");
+            if(foundUserObj.getPosts().size() == 0){
+                searchNumPost.setText("0");
+                noPostMsg.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }else{
+                searchNumPost.setText( foundUserObj.getPosts().size() + "");
+                noPostMsg.setVisibility(View.INVISIBLE);
+                noPostMsg.setVisibility(View.VISIBLE);
+            }
+
         }
         if( foundUserObj.getFollowers() == null){
             System.out.println("Search id follower is null");

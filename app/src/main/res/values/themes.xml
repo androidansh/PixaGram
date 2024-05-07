@@ -9,9 +9,16 @@
         <item name="android:colorPrimary">@color/bgColor</item>
         <item name="android:windowBackground">@color/bgColor</item>
         <item name="android:colorAccent">@color/textColor</item>
-        <item name="android:colorPrimaryDark">@color/textColor</item>
-        <item name="android:statusBarColor">@color/bgColor</item>
-        <!-- Ensure that the system UI's theme is light -->
+        <item name="android:colorPrimaryDark">@color/bgColor</item> <!-- sets the status bar bg color-->
+        <item name="android:navigationBarColor">@color/bgColor</item>
+        <item name="android:windowLightNavigationBar">true</item>
+<!--        <item name="android:statusBarColor">@color/bgColor</item>-->
+
+<!--        <item name="android:statusBarColor">#00000000</item>-->
+
+<!--        <item name="android:fitsSystemWindows">true</item>-->
+<!--        &lt;!&ndash; Ensure that the system UI's theme is light &ndash;&gt;-->
+
         <item name="android:windowLightStatusBar">true</item>
     </style>
 

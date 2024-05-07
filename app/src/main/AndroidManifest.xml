@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/pixa_gram_logo"
+        android:icon="@drawable/pixagram_logo_img"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/pixa_gram_logo"
+        android:roundIcon="@drawable/pixagram_logo_img"
         android:supportsRtl="true"
         android:theme="@style/Theme.Insta_Clone_FireBase"
         tools:targetApi="31">
@@ -39,9 +39,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.AddPostActivity"
-            android:exported="false" />
         <activity
             android:name=".activities.HomeScreenActivity"
             android:windowSoftInputMode="adjustResize"

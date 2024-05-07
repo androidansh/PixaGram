@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.example.insta_clone_firebase.R;
 import com.example.insta_clone_firebase.activities.SignUpActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -44,10 +46,12 @@ public class MailPassFrag extends Fragment {
 
     private TextView msg1,msg2,msg3;
     private EditText createEmail,createPassword,otp;
-    private Button verifyOtp,next;
+    private Button mailBtn;
+    private ImageView mailBtnImg;
     private String OTP_VERIFIED = "";
     private TextView whiteScr;
     private ProgressBar progress;
+    private Boolean isOtpVerified = false,isClicked = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,66 +68,138 @@ public class MailPassFrag extends Fragment {
             }
         });
 
-        verifyOtp.setOnClickListener(new View.OnClickListener() {
+
+        mailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(OTP_VERIFIED.equals("")){
-                    whiteScr.setVisibility(View.VISIBLE);
-                    progress.setVisibility(View.VISIBLE);
-                    createEmail.setEnabled(false);
-                    otp.setEnabled(false);
-                    new Thread(new RunningClass()).start();
-//                    Handler threadHandler = new Handler(Looper.getMainLooper());
-//                    threadHandler.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            send_text_email(createEmail.getText().toString().trim());
-//                        }
-//                    });
+                if(isClicked){
+                    return;
                 }
-                else{
-                    if(otp.getText().toString().trim().isEmpty()){
-                        otp.setError("Enter the OTP first.");
+                if(!isOtpVerified){
+                    if(OTP_VERIFIED == ""){
+                        isClicked = true;
+                        progress.setVisibility(View.VISIBLE);
+                        mailBtn.setVisibility(View.INVISIBLE);
+                        createEmail.setEnabled(false);
+                        otp.setEnabled(false);
+                        new Thread(new RunningClass()).start();
                     }
                     else{
-                        if(otp.getText().toString().trim().equals(OTP_VERIFIED)){
-                            otp.setEnabled(false);
-                            createEmail.setTextColor(0xFF03AF0A);
-                            verifyOtp.setEnabled(false);
-                            createPassword.setVisibility(View.VISIBLE);
-                            createPassword.setEnabled(true);
-                            next.setEnabled(true);
-                            next.setVisibility(View.VISIBLE);
-                            msg1.setVisibility(View.INVISIBLE);
-                            msg3.setVisibility(View.INVISIBLE);
-                            msg2.setVisibility(View.VISIBLE);
+                        if(otp.getText().toString().trim().isEmpty()){
+                            otp.setError("Enter the OTP first.");
+                        }
+                        else{
+                            if(otp.getText().toString().trim().equals(OTP_VERIFIED)){
+                                otp.setEnabled(false);
+                                isOtpVerified = true;
+                                createEmail.setTextColor(0xFF03AF0A);
+                                mailBtn.setVisibility(View.VISIBLE);
+                                mailBtn.setText("Next");
+                                createPassword.setVisibility(View.VISIBLE);
+                                createPassword.setEnabled(true);
+                                msg1.setText("Enter password to create account.");
+                            }
                         }
                     }
                 }
-
-            }
-        });
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(createPassword.getText().toString().trim().isEmpty()){
-                    createPassword.setError("Please enter the password.");
-                } else if (createEmail.getText().toString().trim().isEmpty()) {
-                    createEmail.setError("Please enter email.");
-                }
                 else{
+                    if(createPassword.getText().toString().isEmpty()){
+                        createPassword.setError("Password cannot be empty.");
+                        return;
+                    }
+                    if(createPassword.getText().toString().length() <5 ||createPassword.getText().toString().length() > 12){
+                        createPassword.setError("Password should at least of 5 characters.");
+                        return;
+                    }
+                    if(createPassword.getText().toString().length() > 12){
+                        createPassword.setError("Password should at most of 12 characters.");
+                        return;
+                    }
                     progress.setVisibility(View.VISIBLE);
-                    whiteScr.setVisibility(View.VISIBLE);
-                    next.setEnabled(false);
+                    mailBtn.setVisibility(View.INVISIBLE);
                     createPassword.setEnabled(false);
                     createUserRun run = new createUserRun();
                     new Thread(run).start();
                 }
 
+
             }
         });
 
+        mailBtnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isClicked){
+                    return;
+                }
+                if(!isOtpVerified){
+                    if(OTP_VERIFIED == ""){
+                        isClicked = true;
+                        progress.setVisibility(View.VISIBLE);
+                        mailBtn.setVisibility(View.INVISIBLE);
+                        createEmail.setEnabled(false);
+                        otp.setEnabled(false);
+                        new Thread(new RunningClass()).start();
+                    }
+                    else{
+                        if(otp.getText().toString().trim().isEmpty()){
+                            otp.setError("Enter the OTP first.");
+                        }
+                        else{
+                            if(otp.getText().toString().trim().equals(OTP_VERIFIED)){
+                                otp.setEnabled(false);
+                                isOtpVerified = true;
+                                createEmail.setTextColor(0xFF03AF0A);
+                                mailBtn.setVisibility(View.VISIBLE);
+                                mailBtn.setText("Next");
+                                createPassword.setVisibility(View.VISIBLE);
+                                createPassword.setEnabled(true);
+                                msg1.setText("Enter password to create account.");
+                            }
+                        }
+                    }
+                }
+                else{
+                    if(createPassword.getText().toString().isEmpty()){
+                        createPassword.setError("Password cannot be empty.");
+                        return;
+                    }
+                    if(createPassword.getText().toString().length() <6 ||createPassword.getText().toString().length() > 12){
+                        createPassword.setError("Password should at least of 6 characters.");
+                        return;
+                    }
+                    if(createPassword.getText().toString().length() > 12){
+                        createPassword.setError("Password should at most of 12 characters.");
+                        return;
+                    }
+                    progress.setVisibility(View.VISIBLE);
+                    mailBtn.setVisibility(View.INVISIBLE);
+                    createPassword.setEnabled(false);
+                    createUserRun run = new createUserRun();
+                    new Thread(run).start();
+                }
+
+
+            }
+        });
+
+//        next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(createPassword.getText().toString().trim().isEmpty()){
+//                    createPassword.setError("Please enter the password.");
+//                } else if (createEmail.getText().toString().trim().isEmpty()) {
+//                    createEmail.setError("Please enter email.");
+//                }
+//                else{
+//                    progress.setVisibility(View.VISIBLE);
+//                    createPassword.setEnabled(false);
+//                    createUserRun run = new createUserRun();
+//                    new Thread(run).start();
+//                }
+//
+//            }
+//        });
 
         return view;
     }
@@ -142,9 +218,7 @@ public class MailPassFrag extends Fragment {
         auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(getContext(), "Created User.", Toast.LENGTH_SHORT).show();
                 String user_uid = auth.getCurrentUser().getUid();
-
                 SignUpActivity.createUserModel.setUser_uid(user_uid);
                 SignUpActivity.createUserModel.setUser_mail(email);
                 SignUpActivity.createUserModel.setUser_password(password);
@@ -169,9 +243,8 @@ public class MailPassFrag extends Fragment {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        whiteScr.setVisibility(View.INVISIBLE);
                         progress.setVisibility(View.INVISIBLE);
-                        next.setEnabled(true);
+                        mailBtn.setVisibility(View.VISIBLE);
                         System.out.println("error in adding data in db = " + e.getMessage());
                         e.printStackTrace();
                     }
@@ -183,9 +256,8 @@ public class MailPassFrag extends Fragment {
             {
                 createEmail.setEnabled(true);
                 createPassword.setEnabled(true);
-                whiteScr.setVisibility(View.INVISIBLE);
                 progress.setVisibility(View.INVISIBLE);
-                next.setEnabled(true);
+                mailBtn.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Error in creating account" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
@@ -195,18 +267,16 @@ public class MailPassFrag extends Fragment {
     private void initialiseViews(View view)
     {
         msg1 = view.findViewById(R.id.msg1);
-        msg2 = view.findViewById(R.id.msg2);
         msg3 = view.findViewById(R.id.msg3);
 
-        whiteScr = view.findViewById(R.id.whiteScr);
         progress = view.findViewById(R.id.progress);
 
         createEmail = view.findViewById(R.id.createEmail);
         otp = view.findViewById(R.id.otp);
         createPassword = view.findViewById(R.id.createPassword);
 
-        verifyOtp = view.findViewById(R.id.verifyOTP);
-        next = view.findViewById(R.id.next2);
+        mailBtn = view.findViewById(R.id.proceedMailBtn);
+        mailBtnImg = view.findViewById(R.id.proceedMail);
 
     }
 
@@ -214,13 +284,29 @@ public class MailPassFrag extends Fragment {
     class RunningClass implements Runnable{
         @Override
         public void run() {
-           // Toast.makeText(getContext(), "Entering in thread.", Toast.LENGTH_SHORT).show();
             try {
+                Handler threadHandler = new Handler(Looper.getMainLooper());
+                threadHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "Sending email.Do not exit the app.", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 send_text_email(createEmail.getText().toString().trim());
+
             }
             catch (Exception e){
-                createEmail.setEnabled(true);
                 System.out.println("Error in sending email = " + e.getMessage());
+                Handler threadHandler = new Handler(Looper.getMainLooper());
+                threadHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mailBtn.setText("Verify OTP");
+                        otp.setEnabled(true);
+                        progress.setVisibility(View.INVISIBLE);
+                        createEmail.setEnabled(false);
+                    }
+                });
                 e.printStackTrace();
             }
         }
@@ -239,7 +325,7 @@ public class MailPassFrag extends Fragment {
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("004instagramrobo778","hvwxjxiiecagusow");
+                return new PasswordAuthentication("2004anshumangupta0909","nscdfaproqtatfsj");
             }
         });
         Random random = new Random();
@@ -248,7 +334,7 @@ public class MailPassFrag extends Fragment {
         String msg = "Hello! user. Your one time OTP for email verification is '" + random_otp +
                 "'. Do  not share it with others. This is valid for only 5 minutes.";
         String subject = "noreply@instagram.com";
-        String from = "0909anshumanofficial2004@gmail.com";
+        String from = "2004anshumangupta0909@gmail.com";
 
         MimeMessage m = new MimeMessage(session);
 
@@ -265,12 +351,14 @@ public class MailPassFrag extends Fragment {
             threadHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    verifyOtp.setText("Verify OTP");
+                    mailBtn.setText("Verify OTP");
                     otp.setEnabled(true);
-                    whiteScr.setVisibility(View.INVISIBLE);
                     progress.setVisibility(View.INVISIBLE);
-                    verifyOtp.setEnabled(true);
+                    mailBtn.setVisibility(View.VISIBLE);
+                    mailBtn.setText("Verify");
                     createEmail.setEnabled(false);
+                    isClicked = false;
+
 
                 }
             });
@@ -283,9 +371,8 @@ public class MailPassFrag extends Fragment {
             threadHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    verifyOtp.setText("Verify OTP");
+                    mailBtn.setText("Verify OTP");
                     otp.setEnabled(true);
-                    whiteScr.setVisibility(View.INVISIBLE);
                     progress.setVisibility(View.INVISIBLE);
                     createEmail.setEnabled(true);
 

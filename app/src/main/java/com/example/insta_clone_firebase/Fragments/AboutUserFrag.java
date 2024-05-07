@@ -1,8 +1,11 @@
 package com.example.insta_clone_firebase.Fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,12 +13,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.insta_clone_firebase.activities.HomeScreenActivity;
@@ -27,8 +33,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class AboutUserFrag extends Fragment {
 
-    private TextView userId,userName,userBio,numPost,numFollower,numFollowing;
+    private TextView userId,numPost,numFollower,numFollowing;
+//    private TextView userName,userBio;
     private ImageView userProfile,subMenu;
+    private ConstraintLayout noPostMsg;
     private LinearLayout posts,followers,following;
     private RecyclerView recyclerView;
     private small_post_adapter adapter;
@@ -38,13 +46,23 @@ public class AboutUserFrag extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about_user, container, false);
 
+        HomeScreenActivity.windowFrame.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        HomeScreenActivity.windowFrame.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.transparent));
+
+        HomeScreenActivity.showPost.setBackgroundResource(R.drawable.home);
+        HomeScreenActivity.searchUser.setBackgroundResource(R.drawable.find);
+        HomeScreenActivity.activeAccount.setVisibility(View.VISIBLE);
+        HomeScreenActivity.addPost.setBackgroundResource(R.drawable.add);
+        HomeScreenActivity.reel.setBackgroundResource(R.drawable.reels);
+
         userId = view.findViewById(R.id.about_UserID);
-        userName = view.findViewById(R.id.about_userName);
-        userBio = view.findViewById(R.id.about_userBio);
+//        userName = view.findViewById(R.id.about_userName);
+//        userBio = view.findViewById(R.id.about_userBio);
         userProfile = view.findViewById(R.id.about_userProfile);
         numPost = view.findViewById(R.id.numPost);
         numFollower = view.findViewById(R.id.numFollower);
         numFollowing = view.findViewById(R.id.numFollowing);
+        noPostMsg = view.findViewById(R.id.no_post_found_msg);
 
         posts = view.findViewById(R.id.aboutUserPost);
         followers = view.findViewById(R.id.aboutUserFollower);
@@ -99,25 +117,45 @@ public class AboutUserFrag extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        HomeScreenActivity.showPost.setBackgroundResource(R.drawable.home);
+        HomeScreenActivity.searchUser.setBackgroundResource(R.drawable.find);
+        HomeScreenActivity.activeAccount.setVisibility(View.VISIBLE);
+        HomeScreenActivity.addPost.setBackgroundResource(R.drawable.add);
+        HomeScreenActivity.reel.setBackgroundResource(R.drawable.reels);
         loadUI();
     }
 
     void loadUI(){
         userId.setText( HomeScreenActivity.USER_DATA.getUser_id());
-        userName.setText( HomeScreenActivity.USER_DATA.getUser_name());
-        userBio.setText( HomeScreenActivity.USER_DATA.getUser_bio());
+//        userName.setText( HomeScreenActivity.USER_DATA.getUser_name());
+//        userBio.setText( HomeScreenActivity.USER_DATA.getUser_bio());
         Glide.with(getContext()).load( HomeScreenActivity.USER_DATA.getUser_profile()).into(userProfile);
         if( HomeScreenActivity.USER_POSTS== null){
             numPost.setText("0");
+            noPostMsg.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
         }
         else{
-            numPost.setText( HomeScreenActivity.USER_POSTS.size() + "");
+            if(HomeScreenActivity.USER_POSTS.size() == 0){
+                numPost.setText("0");
+                noPostMsg.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+            else{
+                numPost.setText( HomeScreenActivity.USER_POSTS.size() + "");
+                noPostMsg.setVisibility(View.INVISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
+
+            }
+
         }
         if( HomeScreenActivity.USER_DATA.getFollowers() == null){
             numFollower.setText("0");
+
         }
         else{
             numFollower.setText( HomeScreenActivity.USER_DATA.getFollowers().size() + "");
+
         }
         if( HomeScreenActivity.USER_DATA.getFollowings() == null){
             numFollowing.setText("0");

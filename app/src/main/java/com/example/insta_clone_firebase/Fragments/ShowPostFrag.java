@@ -1,10 +1,15 @@
 package com.example.insta_clone_firebase.Fragments;
 
+import static com.example.insta_clone_firebase.activities.HomeScreenActivity.activeAccount;
+import static com.example.insta_clone_firebase.activities.HomeScreenActivity.searchUser;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -12,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.example.insta_clone_firebase.R;
 import com.example.insta_clone_firebase.activities.HomeScreenActivity;
@@ -38,6 +44,14 @@ public class ShowPostFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_show_post, container, false);
 
+        HomeScreenActivity.windowFrame.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        HomeScreenActivity.windowFrame.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.bgColor));
+
+        HomeScreenActivity.showPost.setBackgroundResource(R.drawable.active_home);
+        HomeScreenActivity.searchUser.setBackgroundResource(R.drawable.find);
+        HomeScreenActivity.activeAccount.setVisibility(View.INVISIBLE);
+        HomeScreenActivity.addPost.setBackgroundResource(R.drawable.add);
+        HomeScreenActivity.reel.setBackgroundResource(R.drawable.reels);
 
         SharedPreferences pref3 = getContext().getSharedPreferences("Pref_User_Post", Context.MODE_PRIVATE);
         String jsonUserPost = pref3.getString("User_Post","");
@@ -61,6 +75,9 @@ public class ShowPostFrag extends Fragment {
         postRecycler.setAdapter(adapter);
         postRecycler.setVisibility(View.VISIBLE);
         postRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(postRecycler.getContext(),
+                new LinearLayoutManager(getContext()).getOrientation());
+        postRecycler.addItemDecoration(dividerItemDecoration);
 
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -71,6 +88,16 @@ public class ShowPostFrag extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        HomeScreenActivity.showPost.setBackgroundResource(R.drawable.active_home);
+        HomeScreenActivity.searchUser.setBackgroundResource(R.drawable.find);
+        HomeScreenActivity.activeAccount.setVisibility(View.INVISIBLE);
+        HomeScreenActivity.addPost.setBackgroundResource(R.drawable.add);
+        HomeScreenActivity.reel.setBackgroundResource(R.drawable.reels);
     }
 
     private void updateData()
@@ -107,17 +134,17 @@ public class ShowPostFrag extends Fragment {
         }
 // getting all posts
 
-        SharedPreferences pref2 = getContext().getSharedPreferences("Pref_All_Post",Context.MODE_PRIVATE);
-        String json_post = pref2.getString("all_post","");
-
-        if(json_post.equals("")){
-            get_all_post_storage.getPosts(getContext());
-        }else{
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<post_create>>(){}.getType();
-            allPost = gson.fromJson(json_post, type);
-        }
+//        SharedPreferences pref2 = getContext().getSharedPreferences("Pref_All_Post",Context.MODE_PRIVATE);
+//        String json_post = pref2.getString("all_post","");
+//
+//        if(json_post.equals("")){
+//            get_all_post_storage.getPosts(getContext());
+//        }else{
+//            Gson gson = new Gson();
+//            Type type = new TypeToken<ArrayList<post_create>>(){}.getType();
+//            allPost = gson.fromJson(json_post, type);
+//        }
 //   getting reels
-        get_all_reels.getReels(getContext());
+//        get_all_reels.getReels(getContext());
     }
 }

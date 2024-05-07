@@ -10,7 +10,9 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/setting_bg"
         android:padding="@dimen/_8sdp"
+        android:paddingTop="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,6 +21,7 @@
             android:id="@+id/subMenu"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/pop_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,9 +30,10 @@
             android:id="@+id/about_UserID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:text="userID"
-            android:textColor="@color/textColor"
+            android:textColor="@color/white"
             android:textSize="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,47 +48,46 @@
             app:layout_constraintTop_toBottomOf="@+id/about_UserID" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/_96sdp"
-            android:layout_height="@dimen/_96sdp"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:src="@color/bgColor"
+            android:id="@+id/circleImageView5"
+            android:layout_width="@dimen/_95sdp"
+            android:layout_height="@dimen/_95sdp"
+            android:src="#B576EC"
             app:layout_constraintBottom_toBottomOf="@+id/profileBorder"
             app:layout_constraintEnd_toEndOf="@+id/profileBorder"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_UserID" />
+            app:layout_constraintStart_toStartOf="@+id/profileBorder"
+            app:layout_constraintTop_toTopOf="@+id/profileBorder" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/about_userProfile"
             android:layout_width="@dimen/_92sdp"
             android:layout_height="@dimen/_92sdp"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:src="@drawable/bg1"
+            android:src="@drawable/user_no_img"
             app:layout_constraintBottom_toBottomOf="@+id/profileBorder"
             app:layout_constraintEnd_toEndOf="@+id/profileBorder"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_UserID" />
+            app:layout_constraintStart_toStartOf="@+id/profileBorder"
+            app:layout_constraintTop_toTopOf="@+id/profileBorder" />
 
-        <TextView
-            android:id="@+id/about_userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="user name"
-            android:textSize="@dimen/_13sdp"
-            android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_userProfile" />
+<!--        <TextView-->
+<!--            android:id="@+id/about_userName"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_8sdp"-->
+<!--            android:text="user name"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/_13sdp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/about_userProfile" />-->
 
         <TextView
             android:id="@+id/about_userBio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
             android:text="bio details"
+            android:textColor="@color/white"
+            android:layout_marginStart="@dimen/_15sdp"
             android:textSize="@dimen/_11sdp"
-            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_userName" />
+            app:layout_constraintTop_toBottomOf="@+id/profileBorder" />
 
         <LinearLayout
             android:id="@+id/aboutUserPost"
@@ -102,14 +105,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Posts"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
 
         </LinearLayout>
@@ -118,8 +121,8 @@
             android:id="@+id/aboutUserFollower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="@dimen/_15sdp"
+            android:orientation="vertical"
             app:layout_constraintStart_toEndOf="@+id/aboutUserPost"
             app:layout_constraintTop_toTopOf="@+id/aboutUserPost">
 
@@ -130,14 +133,14 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Followers"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
 
         </LinearLayout>
@@ -157,14 +160,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Following"
-                android:textColor="@color/textColor"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
 
         </LinearLayout>
@@ -195,10 +198,43 @@
         android:id="@+id/smallPostRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/no_post_found_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/smallPostRecycler">
+
+        <ImageView
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/no_user_post"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No posts yet"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

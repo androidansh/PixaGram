@@ -78,6 +78,8 @@ public class ReelAdapter extends RecyclerView.Adapter<ReelAdapter.ViewHolder> {
         holder.clickLayout.setOnClickListener(new ReelDoubleClickListener() {
             @Override
             public void double_click_listener(View v) {
+                AudioManager manager = (AudioManager)context.getSystemService(context.AUDIO_SERVICE);
+                manager.adjustVolume(AudioManager.ADJUST_UNMUTE,0);
                 holder.reel_anim.setVisibility(View.VISIBLE);
                 holder.reelLike.setTag("Liked");
                 holder.reelLike.setBackgroundResource(R.drawable.red_like);

@@ -462,7 +462,7 @@ public class allPostAdapter extends RecyclerView.Adapter<allPostAdapter.ViewHold
             numLikes = itemView.findViewById(R.id.numLikes);
             save2Bookmark = itemView.findViewById(R.id.save2Bookmark);
             commentBtn = itemView.findViewById(R.id.commentBtn);
-            shareBtn = itemView.findViewById(R.id.sharePostBtn);
+//            shareBtn = itemView.findViewById(R.id.sharePostBtn);
 
         }
     }

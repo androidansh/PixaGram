@@ -1,5 +1,6 @@
 package com.example.insta_clone_firebase.Fragments;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,13 +40,16 @@ public class CommentFrag extends BottomSheetDialogFragment {
     private ImageView profile,sendBtn;
     private EditText comment;
     private int postPosition;
+    int original_margin = 0;
+    private ScrollView s12;
+    private ConstraintLayout cl;
     private CommentAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
-        requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         postPosition = getArguments().getInt("postPosition");
 
@@ -51,8 +58,11 @@ public class CommentFrag extends BottomSheetDialogFragment {
         comment = view.findViewById(R.id.commentPost);
         sendBtn = view.findViewById(R.id.comment_send);
 
+        s12 = view.findViewById(R.id.s12);
+
         adapter = new CommentAdapter(allPostAdapter.postList.get(postPosition).getPostComments(),getContext());
         recyclerView.setAdapter(adapter);
+        cl = view.findViewById(R.id.comment_constraint_layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Glide.with(getContext()).load(HomeScreenActivity.USER_DATA.getUser_profile()).into(profile);
@@ -64,7 +74,25 @@ public class CommentFrag extends BottomSheetDialogFragment {
                 }
             }
         });
+
+//        comment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if(hasFocus){
+//                    Toast.makeText(getContext(), "Focused", Toast.LENGTH_SHORT).show();
+////                    s12.smoothScrollTo(0, s12.getBottom());
+//                    moveEditTextUp();
+//                }else{
+//                    Toast.makeText(getContext(), "Lost Focused", Toast.LENGTH_SHORT).show();
+//                    s12.smoothScrollTo(0, s12.getTop());
+//                }
+//            }
+//        });
+
+
         return view;
+
+
     }
 
     private void postComment(String comment, int postPosition) {
@@ -96,6 +124,36 @@ public class CommentFrag extends BottomSheetDialogFragment {
                 e.printStackTrace();
             }
         });
+
+    }
+
+    private void moveEditTextUp() {
+        // Calculate the height by which EditText needs to be moved up
+        original_margin = 300;
+
+        // Translate the EditText up using animations
+        ObjectAnimator animator = ObjectAnimator.ofFloat(cl, "translationY", -original_margin);
+        animator.setDuration(300);
+        animator.start();
+
+        // Adjust bottom margin of the EditText to prevent layout issues
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) cl.getLayoutParams();
+        params.bottomMargin = 20 + original_margin;
+        cl.setLayoutParams(params);
+
+       // isEditTextMoved = true;
+    }
+
+    private void moveEditTextDown() {
+        // Reset EditText position to its original state
+        ObjectAnimator animator = ObjectAnimator.ofFloat(cl, "translationY", 0);
+        animator.setDuration(300);
+        animator.start();
+
+        // Restore original bottom margin of the EditText
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) cl.getLayoutParams();
+        params.bottomMargin -= original_margin;
+        cl.setLayoutParams(params);
 
     }
 
