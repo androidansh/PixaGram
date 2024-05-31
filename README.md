@@ -13,4 +13,3 @@
 
 ![Screenshot 2024-05-07 223949](https://github.com/androidansh/PixaGram/assets/162359571/e11e51fd-656e-47a9-a7a8-d711308da175)
 
-### Here's the apk download link: https://drive.google.com/file/d/1iMbMFKw-PAGHwONCkIi5wyQb0vjn0L4h/view?usp=drive_link
